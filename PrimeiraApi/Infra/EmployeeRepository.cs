@@ -1,5 +1,4 @@
 ﻿using PrimeiraApi.Model;
-using PrimeiraApi.Model.Dto;
 
 namespace PrimeiraApi.Infra
 {
@@ -16,6 +15,11 @@ namespace PrimeiraApi.Infra
         public List<Employee> GetAll()
         {
             return _context.Employees.ToList();
+        }
+
+        public Employee? GetById(int id)
+        {
+            return _context.Employees.Find(id);
         }
     }
 }

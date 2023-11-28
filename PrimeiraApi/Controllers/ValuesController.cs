@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Any;
-using PrimeiraApi.Model.Dto;
 using PrimeiraApi.ViewModel;
 
 namespace PrimeiraApi.Controllers

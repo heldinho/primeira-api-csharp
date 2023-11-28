@@ -1,5 +1,5 @@
 using PrimeiraApi.Infra;
-using PrimeiraApi.Model.Dto;
+using PrimeiraApi.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 

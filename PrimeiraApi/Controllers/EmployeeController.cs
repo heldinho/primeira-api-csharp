@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PrimeiraApi.Model;
-using PrimeiraApi.Model.Dto;
 using PrimeiraApi.ViewModel;
 
 namespace PrimeiraApi.Controllers
@@ -23,11 +22,21 @@ namespace PrimeiraApi.Controllers
             var filePath = Path.Combine("Storage", employeeView.photo.FileName);
             using Stream fileStream = new FileStream(filePath, FileMode.Create);
             employeeView.photo.CopyTo(fileStream);
+            Console.WriteLine(filePath);
 
             // var employee = new Employee(employeeView.name, employeeView.age, filePath);
             // _employeeRepository.Add(employee);
 
             return ok();
+        }
+
+        [HttpPost]
+        [Route("{id}/download")]
+        public IActionResult DownloadPhoto(int id)
+        {
+            var employee = _employeeRepository.GetById(id);
+            var dataBytes = System.IO.File.ReadAllBytes(employee.photo);
+            return File(dataBytes, "image/png");
         }
 
         [HttpGet]
