@@ -18,10 +18,14 @@ namespace PrimeiraApi.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult Add(EmployeeViewModel employeeView)
+        public IActionResult Add([FromForm] EmployeeViewModel employeeView)
         {
-            var employee = new Employee(employeeView.name, employeeView.age, null);
-            _employeeRepository.Add(employee);
+            var filePath = Path.Combine("Storage", employeeView.photo.FileName);
+            using Stream fileStream = new FileStream(filePath, FileMode.Create);
+            employeeView.photo.CopyTo(fileStream);
+
+            // var employee = new Employee(employeeView.name, employeeView.age, filePath);
+            // _employeeRepository.Add(employee);
 
             return ok();
         }
