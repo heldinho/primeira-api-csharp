@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Any;
+using PrimeiraApi.Model.Dto;
+using PrimeiraApi.ViewModel;
 
 namespace PrimeiraApi.Controllers
 {
@@ -6,11 +9,21 @@ namespace PrimeiraApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        [HttpGet]
-        [Route("pegar-valores")]
-        public IActionResult Get()
+        static HttpClient client = new HttpClient();
+
+        [HttpPost]
+        [Route("teste")]
+        public IActionResult Add(ValuesViewModel values)
         {
-            return Ok();
+            return Ok(values);
+        }
+
+        [HttpGet]
+        [Route("posts")]
+        public async Task<OkObjectResult> Get()
+        {
+            var json = await client.GetStringAsync("https://jsonplaceholder.typicode.com/posts");
+            return Ok(json);
         }
     }
 }
